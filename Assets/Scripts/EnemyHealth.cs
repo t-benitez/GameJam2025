@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.enemigoMuere);
         Destroy(gameObject);
     }
 }

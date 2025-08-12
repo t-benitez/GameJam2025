@@ -25,7 +25,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        PlayRandomDamageSound();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayRandomDamageSound();
 
         Debug.Log($"Jugador recibió daño. Vida actual: {currentHealth}");
 
@@ -34,17 +35,10 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
-    private void PlayRandomDamageSound()
-    {
-        AudioClip[] clips = { sonidoDano1, sonidoDano2, sonidoDano3 };
-        AudioClip clipToPlay = clips[Random.Range(0, clips.Length)];
-        if (clipToPlay != null)
-        {
-            audioSource.PlayOneShot(clipToPlay);
-        }
-    }
+
     private void Die()
     {
-        Debug.Log("Jugador muerto");
+        AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorMuere);
+        Destroy(gameObject);
     }
 }
