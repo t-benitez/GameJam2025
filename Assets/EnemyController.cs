@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public float detectionRange = 5f;
 
     private Rigidbody2D rb;
+    private bool isKnockedBack = false;
+    private float knockbackTimer = 0f;
 
     private void Awake()
     {
@@ -16,6 +18,14 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isKnockedBack)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+            if (knockbackTimer <= 0f)
+                isKnockedBack = false;
+            return;
+        }
+
         if (player == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -31,4 +41,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void ApplyKnockback(Vector2 direction, float force, float duration)
+    {
+        isKnockedBack = true;
+        knockbackTimer = duration;
+        rb.linearVelocity = direction * force;
+    }
 }

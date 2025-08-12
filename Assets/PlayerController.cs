@@ -10,15 +10,21 @@ public class PlayerController : MonoBehaviour
     [Header("Dash")]
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
-    public float dashCooldown = 1f; 
+    public float dashCooldown = 1f;
     public Transform dashTargetOrbital;
-    
+    public int dashDamage = 2;
+    public float dashKnockbackForce = 5f;
+    public float dashKnockbackDuration = 0.2f;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isDashing = false;
     private float dashTimer = 0f;
-    private float dashCooldownTimer= 0f;
+    private float dashCooldownTimer = 0f;
     private Vector2 dashDirection;
+
+    private bool isKnockedBack = false;
+    private float knockbackTimer = 0f;
 
     private void Awake()
     {
@@ -30,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.deltaTime;
 
-        if (!isDashing)
+        if (!isDashing && !isKnockedBack)
         {
             moveInput = Vector2.zero;
             if (Keyboard.current.wKey.isPressed) moveInput.y += 1f;
@@ -41,10 +47,11 @@ public class PlayerController : MonoBehaviour
             moveInput = moveInput.normalized;
         }
 
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame && 
-            dashTargetOrbital != null && 
-            !isDashing && 
-            dashCooldownTimer <= 0f)
+        if (Keyboard.current.leftShiftKey.wasPressedThisFrame &&
+            dashTargetOrbital != null &&
+            !isDashing &&
+            dashCooldownTimer <= 0f &&
+            !isKnockedBack)
         {
             dashDirection = (dashTargetOrbital.position - transform.position).normalized;
             isDashing = true;
@@ -52,8 +59,17 @@ public class PlayerController : MonoBehaviour
             dashCooldownTimer = dashCooldown;
         }
     }
+
     private void FixedUpdate()
     {
+        if (isKnockedBack)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+            if (knockbackTimer <= 0f)
+                isKnockedBack = false;
+            return;
+        }
+
         if (isDashing)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
@@ -68,6 +84,36 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = moveInput * moveSpeed;
         }
-    
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force, float duration)
+    {
+        isKnockedBack = true;
+        knockbackTimer = duration;
+        rb.linearVelocity = direction * force;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDashing && collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(dashDamage);
+            }
+
+            EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                Vector2 knockbackDir = (enemyController.transform.position - transform.position).normalized;
+                enemyController.ApplyKnockback(knockbackDir, dashKnockbackForce, dashKnockbackDuration);
+            }
+        }
+    }
+
+    public bool IsInvulnerable()
+    {
+        return isDashing;
     }
 }

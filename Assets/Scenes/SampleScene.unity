@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -922,6 +922,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  knockbackForce: 20
+  knockbackDuration: 0.2
 --- !u!1 &1822466390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 606669587881177304, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
@@ -1099,9 +1101,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jugador
       objectReference: {fileID: 0}
+    - target: {fileID: 2213695425509406434, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3446845260184104724, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
       propertyPath: orbitDistance
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485563191788641023, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: dashDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485563191788641023, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: dashKnockbackForce
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3921428496521064475, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
       propertyPath: orbitDistance
@@ -1173,6 +1187,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 184063410}
+    - target: {fileID: 2281054513582704896, guid: 8296bccd29dc62149a3374f54910260d, type: 3}
+      propertyPath: detectionRange
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3506653127573567915, guid: 8296bccd29dc62149a3374f54910260d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.02
@@ -1216,6 +1234,14 @@ PrefabInstance:
     - target: {fileID: 7537086393470361898, guid: 8296bccd29dc62149a3374f54910260d, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537086393470361898, guid: 8296bccd29dc62149a3374f54910260d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078923814805898277, guid: 8296bccd29dc62149a3374f54910260d, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
