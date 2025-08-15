@@ -4,18 +4,19 @@ using UnityEngine.InputSystem;
 public class OrbitalController : MonoBehaviour
 {
     public Transform centerObject;
-    public float orbitDistance = 2f;
-    public float rotationSpeed = 50f;
-    public float acceleration = 100f;
-    public float maxSpeed = 200f;
-    public float minSpeed = -200f;
-    public Vector3 rotationAxis = Vector3.forward;
+    public float orbitDistance = 1f;
+    public float rotationSpeed = 180f; // Degrees per second
+
+    private float currentAngle; // In degrees
+    private float targetAngle;  // In degrees
 
     private void Start()
     {
         if (centerObject != null)
         {
-            transform.position = centerObject.position + new Vector3(orbitDistance, 0f, 0f);
+            Vector3 offset = transform.position - centerObject.position;
+            currentAngle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+            targetAngle = currentAngle;
         }
     }
 
@@ -23,13 +24,42 @@ public class OrbitalController : MonoBehaviour
     {
         if (centerObject == null) return;
 
-        float verticalInput = (Keyboard.current.upArrowKey.isPressed ? 1f : 0f) -
-                              (Keyboard.current.downArrowKey.isPressed ? 1f : 0f);
+        // 1. Determine input direction
+        Vector2 input = Vector2.zero;
+        if (Keyboard.current.upArrowKey.isPressed) input.y += 1f;
+        if (Keyboard.current.downArrowKey.isPressed) input.y -= 1f;
+        if (Keyboard.current.rightArrowKey.isPressed) input.x += 1f;
+        if (Keyboard.current.leftArrowKey.isPressed) input.x -= 1f;
 
-        rotationSpeed += verticalInput * acceleration * Time.deltaTime;
-        rotationSpeed = Mathf.Clamp(rotationSpeed, minSpeed, maxSpeed);
+        // 2. If input, set targetAngle
+        if (input != Vector2.zero)
+        {
+            input.Normalize();
+            float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+            if (angle < 0f) angle += 360f;
+            targetAngle = angle;
+        }
 
-        float angleThisFrame = rotationSpeed * Time.deltaTime;
-        transform.RotateAround(centerObject.position, rotationAxis, angleThisFrame);
+        // 3. Smoothly move currentAngle toward targetAngle (shortest path)
+        float angleDiff = Mathf.DeltaAngle(currentAngle, targetAngle);
+        float maxStep = rotationSpeed * Time.deltaTime;
+        if (Mathf.Abs(angleDiff) > 0.01f)
+        {
+            float step = Mathf.Clamp(angleDiff, -maxStep, maxStep);
+            currentAngle += step;
+        }
+        else
+        {
+            currentAngle = targetAngle;
+        }
+
+        // 4. Keep angle in [0, 360)
+        if (currentAngle < 0f) currentAngle += 360f;
+        if (currentAngle >= 360f) currentAngle -= 360f;
+
+        // 5. Update position
+        float rad = currentAngle * Mathf.Deg2Rad;
+        Vector3 offset = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f) * orbitDistance;
+        transform.position = centerObject.position + offset;
     }
 }
