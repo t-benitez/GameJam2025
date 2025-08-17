@@ -3,9 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
+    [Header("Movimiento")]
     public Transform player;
     public float moveSpeed = 3f;
-    public float detectionRange = 5f;
+    public float stopDistance = 0f; // 0 = siempre intenta tocar al jugador (scout)
 
     private Rigidbody2D rb;
     private bool isKnockedBack = false;
@@ -30,14 +31,31 @@ public class EnemyController : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance <= detectionRange)
+        if (stopDistance <= 0f)
         {
+            // 👾 Caso SCOUT → siempre persigue al jugador hasta tocarlo
             Vector2 direction = (player.position - transform.position).normalized;
             rb.linearVelocity = direction * moveSpeed;
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            // 👾 Caso TIRADOR / CAÑONERO / EMBESTIDOR
+            if (distance > stopDistance)
+            {
+                // Está más lejos de la distancia deseada → se acerca
+                Vector2 direction = (player.position - transform.position).normalized;
+                rb.linearVelocity = direction * moveSpeed;
+            }
+            else if (distance < stopDistance * 0.8f)
+            {
+                // Está demasiado cerca → se queda quieto (sin retroceder)
+                rb.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                // Está en la zona correcta → se queda quieto
+                rb.linearVelocity = Vector2.zero;
+            }
         }
     }
 
