@@ -7,8 +7,22 @@ public class OrbitalController : MonoBehaviour
     public float orbitDistance = 1f;
     public float rotationSpeed = 180f; // Degrees per second
 
+    [Header("Damage")]
+    public int spinDamage = 1; // Damage dealt during spin or boomerang
+    private Collider2D orbitalCollider;
+
     private float currentAngle; // In degrees
     private float targetAngle;  // In degrees
+
+    // Attack state
+    [HideInInspector] public bool isAttackActive = false;
+
+    private void Awake()
+    {
+        orbitalCollider = GetComponent<Collider2D>();
+        if (orbitalCollider != null)
+            orbitalCollider.isTrigger = false;
+    }
 
     private void Start()
     {
@@ -22,7 +36,11 @@ public class OrbitalController : MonoBehaviour
 
     private void Update()
     {
-        if (centerObject == null) return;
+        // Only control orbit if not in attack
+        if (centerObject == null || isAttackActive) return;
+
+        if (orbitalCollider != null)
+            Debug.Log("OrbitalCollider isTrigger: " + orbitalCollider.isTrigger);
 
         // 1. Determine input direction
         Vector2 input = Vector2.zero;
@@ -61,5 +79,31 @@ public class OrbitalController : MonoBehaviour
         float rad = currentAngle * Mathf.Deg2Rad;
         Vector3 offset = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f) * orbitDistance;
         transform.position = centerObject.position + offset;
+    }
+
+    // Call this when starting an attack (from PlayerShooter)
+    public void SetAttackActive(bool active)
+    {
+        isAttackActive = active;
+    }
+
+    // Call this to enable/disable damage (from PlayerShooter)
+    public void SetDamageActive(bool active)
+    {
+        if (orbitalCollider != null)
+            orbitalCollider.isTrigger = active;
+    }
+
+    // Damage logic for spin/boomerang
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isAttackActive) return; // Only damage during attack
+
+        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(spinDamage);
+            // Optionally: Add knockback or effects here
+        }
     }
 }
