@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [Header("Movimiento")]
-    public Transform player;
+    public Vector3 playerPosition;
     public float moveSpeed = 3f;
     public float stopDistance = 0f; // 0 = siempre intenta tocar al jugador (scout)
 
@@ -16,7 +16,20 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    private void OnEnable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged += UpdatePlayerPosition;
+    }
 
+    private void OnDisable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged -= UpdatePlayerPosition;
+    }
+
+    private void UpdatePlayerPosition(Vector3 newPosition)
+    {
+        playerPosition = newPosition;
+    }
     private void FixedUpdate()
     {
         if (isKnockedBack)
@@ -27,14 +40,14 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        if (player == null) return;
+        if (playerPosition == null) return;
 
-        float distance = Vector2.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, playerPosition);
 
         if (stopDistance <= 0f)
         {
             // 👾 Caso SCOUT → siempre persigue al jugador hasta tocarlo
-            Vector2 direction = (player.position - transform.position).normalized;
+            Vector2 direction = (playerPosition - transform.position).normalized;
             rb.linearVelocity = direction * moveSpeed;
         }
         else
@@ -43,7 +56,7 @@ public class EnemyController : MonoBehaviour
             if (distance > stopDistance)
             {
                 // Está más lejos de la distancia deseada → se acerca
-                Vector2 direction = (player.position - transform.position).normalized;
+                Vector2 direction = (playerPosition - transform.position).normalized;
                 rb.linearVelocity = direction * moveSpeed;
             }
             else if (distance < stopDistance * 0.8f)

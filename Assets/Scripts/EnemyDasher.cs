@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyDasher : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform player;
+    public Vector3 playerPosition;
     private EnemyDamageOnTouch damageOnTouch;
 
     [Header("Stats de dash")]
@@ -32,6 +32,22 @@ public class EnemyDasher : MonoBehaviour
 
     private Vector2 originalPosition; // para temblor
 
+     //subscribe events
+    private void OnEnable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged += UpdatePlayerPosition;
+    }
+
+    private void OnDisable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged -= UpdatePlayerPosition;
+    }
+
+    private void UpdatePlayerPosition(Vector3 newPosition)
+    {
+        playerPosition = newPosition;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,9 +58,9 @@ public class EnemyDasher : MonoBehaviour
 
     private void Update()
     {
-        if (player == null) return;
+        if (playerPosition == null) return;
 
-        float distance = Vector2.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, playerPosition);
 
         if (!isCharging && !isDashing && !isOnCooldown)
         {
@@ -56,7 +72,7 @@ public class EnemyDasher : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
 
                 // guardamos la última posición del jugador
-                lastSeenPlayerPos = player.position;
+                lastSeenPlayerPos = playerPosition;
 
                 // guardamos la posición base para el temblor
                 originalPosition = rb.position;
@@ -110,10 +126,10 @@ public class EnemyDasher : MonoBehaviour
                 EndDash();
             }
         }
-        else if (!isCharging && !isOnCooldown && player != null)
+        else if (!isCharging && !isOnCooldown && playerPosition != null)
         {
             // persecución normal
-            Vector2 direction = (player.position - transform.position).normalized;
+            Vector2 direction = (playerPosition - transform.position).normalized;
             rb.linearVelocity = direction * 3f; 
         }
         else

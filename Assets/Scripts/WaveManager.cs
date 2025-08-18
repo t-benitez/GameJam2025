@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     public GameObject normalEnemyPrefab;
     public GameObject dasherEnemyPrefab;
     public GameObject shooterEnemyPrefab;
-    public Transform player;
+    public Vector3 playerPosition;
     public float spawnRadius = 8f;
     public float timeBetweenWaves = 3f;
     public int minEnemiesPerWave = 12;
@@ -21,6 +21,23 @@ public class WaveManager : MonoBehaviour
     private List<GameObject> currentEnemies = new List<GameObject>();
     private bool spawning = false;
     private Coroutine waveRoutine;
+
+
+    //subscribe events
+    private void OnEnable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged += UpdatePlayerPosition;
+    }
+
+    private void OnDisable()
+    {
+        PlayerPositionNotifier.OnPlayerPositionChanged -= UpdatePlayerPosition;
+    }
+
+    private void UpdatePlayerPosition(Vector3 newPosition)
+    {
+        playerPosition = newPosition;
+    }
 
     void Start()
     {
@@ -73,28 +90,28 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnWave(int count)
     {
-        if (player == null) return;
+        if (playerPosition == null) return;
 
         float angleStep = 360f / count;
         for (int i = 0; i < count; i++)
         {
             float angle = i * angleStep * Mathf.Deg2Rad;
-            Vector3 spawnPos = player.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * spawnRadius;
+            Vector3 spawnPos = playerPosition + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * spawnRadius;
             GameObject prefab = GetRandomEnemyPrefab();
             GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
 
             // Assign player reference to any script that needs it
             var enemyController = enemy.GetComponent<EnemyController>();
             if (enemyController != null)
-                enemyController.player = player;
+                enemyController.playerPosition = playerPosition;
 
             var enemyDasher = enemy.GetComponent<EnemyDasher>();
             if (enemyDasher != null)
-                enemyDasher.player = player;
+                enemyDasher.playerPosition = playerPosition;
 
             var enemyShooter = enemy.GetComponent<EnemyShooter>();
             if (enemyShooter != null)
-                enemyShooter.player = player;
+                enemyShooter.playerPosition = playerPosition;
 
             currentEnemies.Add(enemy);
         }

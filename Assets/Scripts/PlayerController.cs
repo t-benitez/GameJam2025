@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -26,9 +27,16 @@ public class PlayerController : MonoBehaviour
     private bool isKnockedBack = false;
     private float knockbackTimer = 0f;
 
+    [Header("Events")]
+
+    //public UnityEvent<Vector2> onPositionChanged;
+
+    private Vector2 lastPosition;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        lastPosition = rb.position;
     }
 
     private void Update()
@@ -69,6 +77,7 @@ public class PlayerController : MonoBehaviour
             knockbackTimer -= Time.fixedDeltaTime;
             if (knockbackTimer <= 0f)
                 isKnockedBack = false;
+            CheckPositionChange();
             return;
         }
 
@@ -85,6 +94,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.linearVelocity = moveInput * moveSpeed;
+        }
+        CheckPositionChange();
+    }
+
+    private void CheckPositionChange()
+    {
+        if (rb.position != lastPosition)
+        {
+            lastPosition = rb.position;
+            PlayerPositionNotifier.NotifyPositionChanged(lastPosition);
         }
     }
 
