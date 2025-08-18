@@ -24,9 +24,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayRandomDamageSound();
+        PlayDamageSound();
+        
 
         Debug.Log($"Jugador recibió daño. Vida actual: {currentHealth}");
 
@@ -38,7 +37,12 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        //AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorMuere);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorMuere);
         Destroy(gameObject);
+    }
+    private void PlayDamageSound(){
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayRandomDamageSound();
     }
 }

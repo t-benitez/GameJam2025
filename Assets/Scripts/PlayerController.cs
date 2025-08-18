@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashTimer = dashDuration;
             dashCooldownTimer = dashCooldown;
-
-            AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorDash);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorDash);
         }
     }
 

@@ -50,8 +50,6 @@ public class PlayerShooter : MonoBehaviour
                 if (Keyboard.current.spaceKey.isPressed && fireCooldown <= 0f)
                 {
                     Shoot();
-                    fireCooldown = fireRate;
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorTiro);
                 }
                 // Ensure orbital is in normal state
                 if (orbitalController != null)
@@ -111,6 +109,10 @@ public class PlayerShooter : MonoBehaviour
         {
             proj.SetDirection(direction);
         }
+        fireCooldown = fireRate;
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorTiro);
+
     }
 
     private System.Collections.IEnumerator BoomerangRoutine()
