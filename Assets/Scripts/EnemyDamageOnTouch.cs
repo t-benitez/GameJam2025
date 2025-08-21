@@ -20,6 +20,9 @@ public class EnemyDamageOnTouch : MonoBehaviour
             Vector2 contactPoint = collision.GetContact(0).point;
             Vector2 knockbackDirection = ((Vector2)playerController.transform.position - contactPoint).normalized;
             playerController.ApplyKnockback(knockbackDirection, knockbackForce, knockbackDuration);
+
         }
+        //print("Enemy collided with: " + collision.gameObject.name);
+        print(playerHealth);
     }
 }

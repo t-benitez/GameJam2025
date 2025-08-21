@@ -39,9 +39,6 @@ public class OrbitalController : MonoBehaviour
         // Only control orbit if not in attack
         if (centerObject == null || isAttackActive) return;
 
-        if (orbitalCollider != null)
-            Debug.Log("OrbitalCollider isTrigger: " + orbitalCollider.isTrigger);
-
         // 1. Determine input direction
         Vector2 input = Vector2.zero;
         if (Keyboard.current.upArrowKey.isPressed) input.y += 1f;

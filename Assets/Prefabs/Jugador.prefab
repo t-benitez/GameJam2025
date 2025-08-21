@@ -156,6 +156,11 @@ MonoBehaviour:
   shootingOrbital: {fileID: 8326103727180800675}
   projectilePrefab: {fileID: 7135632150445421676, guid: 0a9052f5bf8d5d44e8225c1829d66ff4, type: 3}
   fireRate: 0.2
+  boomerangDistance: 8
+  boomerangSpeed: 10
+  boomerangReturnDelay: 0.2
+  spinSpeed: 720
+  spinDuration: 1
 --- !u!114 &2806746659482092947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,8 +331,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8326103727180800675}
   - component: {fileID: 824818954911070376}
-  - component: {fileID: 4251296298331464051}
   - component: {fileID: 1824758896709504502}
+  - component: {fileID: 137031672301366258}
+  - component: {fileID: 628395881155421930}
   m_Layer: 0
   m_Name: ImprovedOrbital
   m_TagString: Untagged
@@ -393,7 +399,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -405,21 +411,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4251296298331464051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5455444059658021094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 242e96cfcdfe4f74a8f3593db6313356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 5034878360499816792}
-  orbitRadius: 2
-  moveSpeed: 10
 --- !u!114 &1824758896709504502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,3 +426,68 @@ MonoBehaviour:
   centerObject: {fileID: 5034878360499816792}
   orbitDistance: 2
   rotationSpeed: 300
+  spinDamage: 3
+  isAttackActive: 0
+--- !u!58 &137031672301366258
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455444059658021094}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!50 &628395881155421930
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455444059658021094}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

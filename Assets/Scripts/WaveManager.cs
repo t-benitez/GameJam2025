@@ -13,6 +13,8 @@ public class WaveManager : MonoBehaviour
     public int minEnemiesPerWave = 12;
     public int maxEnemiesPerWave = 16;
 
+    public TMPro.TextMeshProUGUI waveText;
+
     [Header("Spawn Weights (Higher = More Common)")]
     public int normalWeight = 8;
     public int dasherWeight = 2;
@@ -22,6 +24,7 @@ public class WaveManager : MonoBehaviour
     private bool spawning = false;
     private Coroutine waveRoutine;
 
+    private int waveNumber = 0;
 
     //subscribe events
     private void OnEnable()
@@ -40,9 +43,13 @@ public class WaveManager : MonoBehaviour
     }
 
     void Start()
-    {
+    {   
+        if (waveText != null)
+        {
+            waveText.text = "Wave: 0";
+        }
         // Optionally start automatically
-        // StartWaves();
+        StartWaves();
     }
 
     public void StartWaves()
@@ -74,7 +81,10 @@ public class WaveManager : MonoBehaviour
     private IEnumerator WaveLoop()
     {
         while (spawning)
-        {
+        {   
+            // Wait before next wave
+            yield return new WaitForSeconds(timeBetweenWaves);
+            
             int enemyCount = Random.Range(minEnemiesPerWave, maxEnemiesPerWave + 1);
             SpawnWave(enemyCount);
 
@@ -82,9 +92,6 @@ public class WaveManager : MonoBehaviour
             yield return new WaitUntil(() => currentEnemies.TrueForAll(e => e == null));
 
             currentEnemies.Clear();
-
-            // Wait before next wave
-            yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
 
@@ -115,6 +122,7 @@ public class WaveManager : MonoBehaviour
 
             currentEnemies.Add(enemy);
         }
+        waveText.text = "Wave: " + (++waveNumber).ToString();
     }
 
     private GameObject GetRandomEnemyPrefab()
