@@ -33,12 +33,22 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 lastPosition;
 
+    [Header("Animator")]
+    public Animator animator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
     }
-
+    private void MoveToRight(){
+        moveInput.x += 1f;
+        animator.SetBool("Right",true);
+    }
+    private void MoveToLeft(){
+        moveInput.x -= 1f;
+        animator.SetBool("Right",false);
+    }
     private void Update()
     {
         if (dashCooldownTimer > 0f)
@@ -49,8 +59,8 @@ public class PlayerController : MonoBehaviour
             moveInput = Vector2.zero;
             if (Keyboard.current.wKey.isPressed) moveInput.y += 1f;
             if (Keyboard.current.sKey.isPressed) moveInput.y -= 1f;
-            if (Keyboard.current.dKey.isPressed) moveInput.x += 1f;
-            if (Keyboard.current.aKey.isPressed) moveInput.x -= 1f;
+            if (Keyboard.current.dKey.isPressed) MoveToRight();
+            if (Keyboard.current.aKey.isPressed) MoveToLeft();
 
             moveInput = moveInput.normalized;
         }
