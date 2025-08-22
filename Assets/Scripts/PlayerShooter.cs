@@ -116,43 +116,47 @@ public class PlayerShooter : MonoBehaviour
     }
 
     private System.Collections.IEnumerator BoomerangRoutine()
+{
+    isBoomerangActive = true;
+    
+    // Guardar la posición local inicial relativa al personaje
+    Vector3 initialLocalPosition = shootingOrbital.localPosition;
+    
+    // Calcular dirección basada en la posición local o la rotación del personaje
+    Vector3 localDirection = shootingOrbital.localPosition.normalized;
+    Vector3 targetLocalPosition = localDirection * boomerangDistance;
+
+    // Mover hacia afuera (en espacio local)
+    float t = 0f;
+    while (t < 1f)
     {
-        isBoomerangActive = true;
-        orbitalStartLocalPos = shootingOrbital.localPosition;
-        Vector3 startWorld = shootingOrbital.position;
-        Vector3 dir = (shootingOrbital.position - transform.position).normalized;
-        Vector3 targetWorld = transform.position + dir * boomerangDistance;
-
-        // Move out
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime * boomerangSpeed;
-            shootingOrbital.position = Vector3.Lerp(startWorld, targetWorld, t);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(boomerangReturnDelay);
-
-        // Move back
-        t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime * boomerangSpeed;
-            shootingOrbital.position = Vector3.Lerp(targetWorld, startWorld, t);
-            yield return null;
-        }
-
-        shootingOrbital.localPosition = orbitalStartLocalPos;
-        isBoomerangActive = false;
-
-        // End attack state
-        if (orbitalController != null)
-        {
-            orbitalController.SetAttackActive(false);
-            orbitalController.SetDamageActive(false);
-        }
+        t += Time.deltaTime * boomerangSpeed;
+        shootingOrbital.localPosition = Vector3.Lerp(initialLocalPosition, targetLocalPosition, t);
+        yield return null;
     }
+
+    yield return new WaitForSeconds(boomerangReturnDelay);
+
+    // Mover de regreso (en espacio local)
+    t = 0f;
+    while (t < 1f)
+    {
+        t += Time.deltaTime * boomerangSpeed;
+        shootingOrbital.localPosition = Vector3.Lerp(targetLocalPosition, initialLocalPosition, t);
+        yield return null;
+    }
+
+    // Asegurar que vuelve exactamente a la posición inicial
+    shootingOrbital.localPosition = initialLocalPosition;
+    isBoomerangActive = false;
+
+    // End attack state
+    if (orbitalController != null)
+    {
+        orbitalController.SetAttackActive(false);
+        orbitalController.SetDamageActive(false);
+    }
+}
 
     private void SpinAttack()
     {
