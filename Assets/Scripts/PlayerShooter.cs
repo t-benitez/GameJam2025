@@ -37,15 +37,15 @@ public class PlayerShooter : MonoBehaviour
     private void Update()
     {
         // Switch attack modes
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) currentAttack = AttackMode.Normal;
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) currentAttack = AttackMode.Boomerang;
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) currentAttack = AttackMode.Spin;
+        /*if (Keyboard.current.digit1Key.wasPressedThisFrame) currentAttack = AttackMode.Normal;*/
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) currentAttack = AttackMode.Boomerang;
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) currentAttack = AttackMode.Spin;
 
         fireCooldown -= Time.deltaTime;
 
         switch (currentAttack)
         {
-            case AttackMode.Normal:
+            /*case AttackMode.Normal:
                 if (shootingOrbital == null || projectilePrefab == null) return;
                 if (Keyboard.current.spaceKey.isPressed && fireCooldown <= 0f)
                 {
@@ -57,7 +57,7 @@ public class PlayerShooter : MonoBehaviour
                     orbitalController.SetAttackActive(false);
                     orbitalController.SetDamageActive(false);
                 }
-                break;
+                break;*/
 
             case AttackMode.Boomerang:
                 if (!isBoomerangActive && Keyboard.current.spaceKey.wasPressedThisFrame)
