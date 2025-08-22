@@ -126,6 +126,9 @@ public class PlayerShooter : MonoBehaviour
     Vector3 localDirection = shootingOrbital.localPosition.normalized;
     Vector3 targetLocalPosition = localDirection * boomerangDistance;
 
+    // Iniciar corrutina de rotación
+    Coroutine rotationCoroutine = StartCoroutine(RotateOrbitalRoutine());
+
     // Mover hacia afuera (en espacio local)
     float t = 0f;
     while (t < 1f)
@@ -146,6 +149,12 @@ public class PlayerShooter : MonoBehaviour
         yield return null;
     }
 
+    // Detener la rotación
+    if (rotationCoroutine != null)
+    {
+        StopCoroutine(rotationCoroutine);
+    }
+
     // Asegurar que vuelve exactamente a la posición inicial
     shootingOrbital.localPosition = initialLocalPosition;
     isBoomerangActive = false;
@@ -155,6 +164,18 @@ public class PlayerShooter : MonoBehaviour
     {
         orbitalController.SetAttackActive(false);
         orbitalController.SetDamageActive(false);
+    }
+}
+
+private System.Collections.IEnumerator RotateOrbitalRoutine()
+{
+    float rotationSpeed = 720f; // Grados por segundo - ajusta según necesites
+    
+    while (true)
+    {
+        // Rotar continuamente en el eje Z
+        shootingOrbital.Rotate(0f, 0f, rotationSpeed * Time.deltaTime, Space.Self);
+        yield return null;
     }
 }
 
