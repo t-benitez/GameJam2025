@@ -107,6 +107,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 5
   stopDistance: 0
+  spriteRenderer: {fileID: 7156402064812141299}
 --- !u!50 &9078923814805898277
 Rigidbody2D:
   serializedVersion: 5

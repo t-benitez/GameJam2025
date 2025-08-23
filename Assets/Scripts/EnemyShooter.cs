@@ -42,6 +42,7 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
+
     private void Shoot()
     {
         if (bulletPrefab != null && firePoint != null && playerPosition != null)

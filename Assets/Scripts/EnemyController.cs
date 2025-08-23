@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
     private bool isKnockedBack = false;
     private float knockbackTimer = 0f;
 
+    [Header("Animator")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +33,13 @@ public class EnemyController : MonoBehaviour
     {
         playerPosition = newPosition;
     }
+    private void flipX(float x)
+    {
+        if (x < 0)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+    }
     private void FixedUpdate()
     {
         if (isKnockedBack)
@@ -43,6 +53,8 @@ public class EnemyController : MonoBehaviour
         if (playerPosition == null) return;
 
         float distance = Vector2.Distance(transform.position, playerPosition);
+        float distancex = playerPosition.x - transform.position.x;
+        flipX(distancex);
 
         if (stopDistance <= 0f)
         {
@@ -71,6 +83,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
 
     public void ApplyKnockback(Vector2 direction, float force, float duration)
     {
