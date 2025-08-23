@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorMuere);
+        PlayerDeathNotifier.Die(true);
         Destroy(gameObject);
     }
     private void PlayDamageSound(){
