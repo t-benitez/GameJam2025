@@ -94,6 +94,7 @@ private IEnumerator InvulnerabilityRoutine()
             AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorMuere);
 
         Destroy(gameObject);
+        PlayerDeathNotifier.Die(true);
     }
     private void PlayDamageSound(){
         if (AudioManager.Instance != null)
