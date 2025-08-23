@@ -230,6 +230,18 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 460838125}
+    - target: {fileID: 1758191843371313305, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: dashSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758191843371313305, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: shootingOrbital
+      value: 
+      objectReference: {fileID: 1648262612}
+    - target: {fileID: 1824758896709504502, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: rotationSpeed
+      value: 450
+      objectReference: {fileID: 0}
     - target: {fileID: 2328991772122759870, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
       propertyPath: m_Name
       value: Jugador
@@ -254,6 +266,10 @@ PrefabInstance:
       propertyPath: sonidoDano3
       value: 
       objectReference: {fileID: 8300000, guid: f1f3f8b41a182844bb47712b06eafc6a, type: 3}
+    - target: {fileID: 2837418644897832386, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5034878360499816792, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -1065,7 +1081,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.181
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2185,6 +2201,10 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[1].Array.data[3].Y
       value: -1249838720
       objectReference: {fileID: 0}
+    - target: {fileID: 3458612595653115758, guid: a14ae9b7d38e8454385d454cf243be2e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5536823762481173593, guid: a14ae9b7d38e8454385d454cf243be2e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -2237,9 +2257,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6462552910293774396, guid: a14ae9b7d38e8454385d454cf243be2e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8087847103137438279, guid: a14ae9b7d38e8454385d454cf243be2e, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8087847103137438279, guid: a14ae9b7d38e8454385d454cf243be2e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

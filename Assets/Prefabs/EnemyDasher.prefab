@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6285558462712749127}
   - component: {fileID: 3988460849999511166}
   - component: {fileID: 7326990194126166420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyDasher
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   stopDistance: 5
   chargeTime: 1
-  dashSpeed: 20
+  dashSpeed: 40
   dashDistance: 8
   cooldownTime: 3
   chargeShakeAmount: 0.1
