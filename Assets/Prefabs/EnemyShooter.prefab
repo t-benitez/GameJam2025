@@ -198,4 +198,4 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 4244063153794169963, guid: e19937c592e4d3942a85b0621ef99387, type: 3}
   firePoint: {fileID: 3506653127573567915}
-  fireCooldown: 3
+  fireCooldown: 2

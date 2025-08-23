@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1981352120723365676}
   - component: {fileID: -6020667024712474149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1397c270cc1d32e448449d7eb366c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 7537086393470361898, guid: 3b254d93cc7df094db37c671039c49bf, type: 3}
-  player: {fileID: 5034878360499816792, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+  normalEnemyPrefab: {fileID: 0}
+  dasherEnemyPrefab: {fileID: 0}
+  shooterEnemyPrefab: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   spawnRadius: 8
   timeBetweenWaves: 3
   minEnemiesPerWave: 12
   maxEnemiesPerWave: 16
+  waveText: {fileID: 0}
+  normalWeight: 8
+  dasherWeight: 2
+  shooterWeight: 2
