@@ -24,6 +24,7 @@ public class WaveManager : MonoBehaviour
     private bool spawning = false;
     private Coroutine waveRoutine;
 
+    [Header("Events")]
     private int waveNumber = 0;
 
     //subscribe events
@@ -43,10 +44,11 @@ public class WaveManager : MonoBehaviour
     }
 
     void Start()
-    {   
+    {
         if (waveText != null)
         {
             waveText.text = "Wave: 0";
+            WaveObserver.NotifyNewWave(waveNumber);
         }
         // Optionally start automatically
         StartWaves();
@@ -123,6 +125,7 @@ public class WaveManager : MonoBehaviour
             currentEnemies.Add(enemy);
         }
         waveText.text = "Wave: " + (++waveNumber).ToString();
+        WaveObserver.NotifyNewWave(waveNumber);
     }
 
     private GameObject GetRandomEnemyPrefab()
