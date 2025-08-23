@@ -9,10 +9,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - InvulnerablePlayer
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
