@@ -118,9 +118,11 @@ public class PlayerShooter : MonoBehaviour
     private System.Collections.IEnumerator BoomerangRoutine()
 {
     isBoomerangActive = true;
+    if(AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorTiro);
     
     // Guardar la posición local inicial relativa al personaje
-    Vector3 initialLocalPosition = shootingOrbital.localPosition;
+        Vector3 initialLocalPosition = shootingOrbital.localPosition;
     
     // Calcular dirección basada en la posición local o la rotación del personaje
     Vector3 localDirection = shootingOrbital.localPosition.normalized;
@@ -183,6 +185,8 @@ private System.Collections.IEnumerator RotateOrbitalRoutine()
     {
         // Spin the orbital rapidly around the player
         shootingOrbital.RotateAround(transform.position, Vector3.forward, spinSpeed * Time.deltaTime);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound(AudioManager.Instance.ataqueOrbitales);
         // Collider is enabled during spin for damage (handled by OrbitalController)
     }
 }

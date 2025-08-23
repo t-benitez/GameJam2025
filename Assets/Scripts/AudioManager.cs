@@ -7,7 +7,11 @@ public class AudioManager : MonoBehaviour
     [Header("Sonidos Jugador")]
     public AudioClip jugadorMuere;
     public AudioClip jugadorDash;
+
+    [Header("Sonidos Ataque Jugador")]
     public AudioClip jugadorTiro;
+
+    public AudioClip ataqueOrbitales;
 
     [Header("Sonidos Enemigo")]
     public AudioClip enemigoMuere;
