@@ -349,6 +349,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2328991772122759870, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 460838125}
+    - targetCorrespondingSourceObject: {fileID: 5455444059658021094, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1648262617}
   m_SourcePrefab: {fileID: 100100000, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
 --- !u!1 &374253436 stripped
 GameObject:
@@ -559,6 +562,7 @@ MonoBehaviour:
   jugadorMuere: {fileID: 8300000, guid: 6a75b2aeaaa0d7b458196eb5cf31d155, type: 3}
   jugadorDash: {fileID: 8300000, guid: 4db8fda062793574e95ce68133469515, type: 3}
   jugadorTiro: {fileID: 8300000, guid: 4d9e19668facbf94b822bd35146f1533, type: 3}
+  ataqueOrbitales: {fileID: 8300000, guid: 8de3ffb9815cc3a4183a8d5d20275f82, type: 3}
   enemigoMuere: {fileID: 8300000, guid: f556811e982285f41b072a4eafecdc19, type: 3}
   sonidoDano1: {fileID: 8300000, guid: f1f3f8b41a182844bb47712b06eafc6a, type: 3}
   sonidoDano2: {fileID: 8300000, guid: f1f3f8b41a182844bb47712b06eafc6a, type: 3}
@@ -570,7 +574,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218470864}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1034,6 +1038,32 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &1648262611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5455444059658021094, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+  m_PrefabInstance: {fileID: 374253435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1648262612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8326103727180800675, guid: b9638f69773b2d740990e53af79c70e8, type: 3}
+  m_PrefabInstance: {fileID: 374253435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1648262617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648262611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2f9281e7d0e264babad1e9afa7c91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 180
+  rotationAxis: {x: 0, y: 0, z: 1}
+  rotationSpace: 1
+  orbitalTransform: {fileID: 1648262612}
 --- !u!1 &1666573440
 GameObject:
   m_ObjectHideFlags: 0
