@@ -56,36 +56,36 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-private IEnumerator InvulnerabilityRoutine()
-{
-    isInvulnerable = true;
-
-    // guardar capa actual y cambiar
-    defaultLayer = gameObject.layer;
-    gameObject.layer = LayerMask.NameToLayer("InvulnerablePlayer");
-
-    float timer = 0f;
-    bool faded = false;
-
-    while (timer < invulnerableDuration)
+    private IEnumerator InvulnerabilityRoutine()
     {
-        if (spriteRenderer != null)
+        isInvulnerable = true;
+
+        // guardar capa actual y cambiar
+        defaultLayer = gameObject.layer;
+        gameObject.layer = LayerMask.NameToLayer("InvulnerablePlayer");
+
+        float timer = 0f;
+        bool faded = false;
+
+        while (timer < invulnerableDuration)
         {
-            Color c = originalColor;
-            c.a = faded ? 1f : 0.3f;
-            spriteRenderer.color = c;
-            faded = !faded;
+            if (spriteRenderer != null)
+            {
+                Color c = originalColor;
+                c.a = faded ? 1f : 0.3f;
+                spriteRenderer.color = c;
+                faded = !faded;
+            }
+
+            yield return new WaitForSeconds(blinkInterval);
+            timer += blinkInterval;
         }
 
-        yield return new WaitForSeconds(blinkInterval);
-        timer += blinkInterval;
+        // restaurar
+        gameObject.layer = defaultLayer;
+        if (spriteRenderer != null) spriteRenderer.color = originalColor;
+        isInvulnerable = false;
     }
-
-    // restaurar
-    gameObject.layer = defaultLayer;
-    if (spriteRenderer != null) spriteRenderer.color = originalColor;
-    isInvulnerable = false;
-}
 
 
     private void Die()
@@ -96,12 +96,22 @@ private IEnumerator InvulnerabilityRoutine()
         Destroy(gameObject);
         PlayerDeathNotifier.Die(true);
     }
-    private void PlayDamageSound(){
+    private void PlayDamageSound()
+    {
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayRandomDamageSound();
     }
 
-    public bool IsInvulnerable(){
+    public bool IsInvulnerable()
+    {
         return isInvulnerable;
+    }
+    public float GetHealthPercentage()
+    {
+        return (float)currentHealth / maxHealth;
+    }
+    public int GetActualHealth()
+    {
+        return currentHealth;
     }
 }

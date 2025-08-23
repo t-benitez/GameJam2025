@@ -3,6 +3,7 @@ using UnityEngine;
 public class DeathCanvas : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup gameCanvasGroup;
     private void OnEnable()
     {
         PlayerDeathNotifier.OnPlayerDeath += HandlePlayerDeath;
@@ -23,6 +24,7 @@ public class DeathCanvas : MonoBehaviour
     {
         if (isDead)
         {
+            StartCoroutine(HideGameCanvas());
             ShowDeathCanvas();
         }
     }
@@ -33,10 +35,25 @@ public class DeathCanvas : MonoBehaviour
         {
             LeanTween.alphaCanvas(canvasGroup, 1f, 0.25f)
             .setEase(LeanTweenType.easeOutQuad)
-            .setOnComplete(() => {
+            .setOnComplete(() =>
+            {
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
             });
         }
+    }
+    private System.Collections.IEnumerator HideGameCanvas()
+    {
+        if (gameCanvasGroup != null)
+        {
+            LeanTween.alphaCanvas(gameCanvasGroup, 0f, 0.25f)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setOnComplete(() =>
+            {
+                gameCanvasGroup.interactable = false;
+                gameCanvasGroup.blocksRaycasts = false;
+            });
+        }
+        yield return null;
     }
 }

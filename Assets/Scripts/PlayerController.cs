@@ -34,20 +34,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastPosition;
 
     [Header("Animator")]
-    public Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer SpriteRenderer;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
     }
-    private void MoveToRight(){
+    private void MoveToRight()
+    {
         moveInput.x += 1f;
-        animator.SetBool("Right",true);
+        SpriteRenderer.flipX = false;
     }
     private void MoveToLeft(){
         moveInput.x -= 1f;
-        animator.SetBool("Right",false);
+        SpriteRenderer.flipX = true;
     }
     private void Update()
     {
@@ -71,15 +74,38 @@ public class PlayerController : MonoBehaviour
             dashCooldownTimer <= 0f &&
             !isKnockedBack)
         {
-            dashDirection = (dashTargetOrbital.position - transform.position).normalized;
-            isDashing = true;
-            dashTimer = dashDuration;
-            dashCooldownTimer = dashCooldown;
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorDash);
+            Dash();
         }
     }
 
+    private void Dash()
+    {
+        dashDirection = (dashTargetOrbital.position - transform.position).normalized;
+        SetDashPosition(dashDirection.x);
+        isDashing = true;
+        animator.SetBool("Dash", true);
+        dashTimer = dashDuration;
+        dashCooldownTimer = dashCooldown;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound(AudioManager.Instance.jugadorDash);
+    }
+
+    private void SetDashPosition(float x)
+    {
+
+        if (x < 0)
+            SpriteRenderer.flipX = true;
+        else
+            SpriteRenderer.flipX = false;
+    
+    
+        
+    }
+    private void StopDashing()
+    {
+        isDashing = false;
+        animator.SetBool("Dash", false);
+    }
     private void FixedUpdate()
     {
         if (isKnockedBack)
@@ -98,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
             if (dashTimer <= 0f)
             {
-                isDashing = false;
+                StopDashing();
             }
         }
         else

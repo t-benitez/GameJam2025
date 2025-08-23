@@ -19,7 +19,17 @@ public class PlayerHealthUI : MonoBehaviour
     {
         if (playerHealth != null && healthSlider != null)
         {
-            healthSlider.value = playerHealth.currentHealth;
+            float targetHealth = playerHealth.GetActualHealth();
+            
+            
+            if (healthSlider.value != targetHealth)
+            {
+                LeanTween.value(healthSlider.value, targetHealth, 0.2f)
+                    .setOnUpdate((float value) => {
+                        healthSlider.value = value;
+                    })
+                    .setEase(LeanTweenType.easeOutQuad); 
+            }
         }
     }
 }
