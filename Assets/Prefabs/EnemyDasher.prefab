@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6285558462712749127}
   - component: {fileID: 3988460849999511166}
   - component: {fileID: 7326990194126166420}
+  - component: {fileID: 8809675177894712159}
   m_Layer: 6
   m_Name: EnemyDasher
   m_TagString: Enemy
@@ -82,8 +83,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 4801227835787818748, guid: 0af16b459454de5438f8743af476f37a, type: 3}
-  m_Color: {r: 0.495283, g: 1, b: 0.7497877, a: 1}
+  m_Sprite: {fileID: -9061675952183221474, guid: dc449c4918d519f42a11aa96390eb878, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -219,3 +220,27 @@ MonoBehaviour:
   cooldownTime: 3
   chargeShakeAmount: 0.1
   chargeShakeSpeed: 20
+  animator: {fileID: 8809675177894712159}
+  spriteRenderer: {fileID: 7156402064812141299}
+--- !u!95 &8809675177894712159
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537086393470361898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dd6f41a95f04dbf45858cf331629d2b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

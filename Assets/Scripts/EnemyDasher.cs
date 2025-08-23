@@ -31,6 +31,9 @@ public class EnemyDasher : MonoBehaviour
     private float cooldownTimer = 0f;
 
     private Vector2 originalPosition; // para temblor
+    [Header("Animator")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
      //subscribe events
     private void OnEnable()
@@ -67,6 +70,10 @@ public class EnemyDasher : MonoBehaviour
             // si está en la distancia de carga -> empieza a cargar
             if (distance <= stopDistance)
             {
+                Vector2 direction = (playerPosition - transform.position).normalized;
+                flipX(direction.x);
+                animator.SetBool("Charge", true);
+
                 isCharging = true;
                 chargeTimer = chargeTime;
                 rb.linearVelocity = Vector2.zero;
@@ -88,18 +95,11 @@ public class EnemyDasher : MonoBehaviour
             Vector2 perpendicular = new Vector2(-1, 1).normalized; 
             rb.MovePosition(originalPosition + perpendicular * offset);
 
+            if(chargeTimer <= 0.3f && chargeTimer>=0.2f )
+                lastSeenPlayerPos = playerPosition;
             if (chargeTimer <= 0f)
             {
-                // calcula la dirección hacia la última posición vista
-                dashDirection = (lastSeenPlayerPos - rb.position).normalized;
-
-                // empieza el dash
-                isCharging = false;
-                isDashing = true;
-                dashTraveled = 0f;
-
-                if (damageOnTouch != null)
-                    damageOnTouch.enabled = true; 
+                dash();
             }
         }
 
@@ -113,6 +113,22 @@ public class EnemyDasher : MonoBehaviour
         }
     }
 
+    private void dash()
+    {
+        /*
+        Vector2 actualPosition = new Vector2(playerPosition.x, playerPosition.y);
+        dashDirection = ( actualPosition - rb.position).normalized;*/
+        dashDirection = (lastSeenPlayerPos - rb.position).normalized;
+        animator.SetBool("Charge", false);
+        animator.SetBool("Dash", true);
+
+        isCharging = false;
+        isDashing = true;
+        dashTraveled = 0f;
+
+        if (damageOnTouch != null)
+            damageOnTouch.enabled = true; 
+    }
     private void FixedUpdate()
     {
         if (isDashing)
@@ -128,14 +144,22 @@ public class EnemyDasher : MonoBehaviour
         }
         else if (!isCharging && !isOnCooldown && playerPosition != null)
         {
-            // persecución normal
             Vector2 direction = (playerPosition - transform.position).normalized;
-            rb.linearVelocity = direction * 3f; 
+            flipX(direction.x);
+            rb.linearVelocity = direction * 3f;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
         }
+    }
+    
+    private void flipX(float x)
+    {
+        if (x < 0)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
     }
 
     private void EndDash()
@@ -144,8 +168,9 @@ public class EnemyDasher : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         rb.linearVelocity = Vector2.zero;
+        animator.SetBool("Dash", false);
 
         if (damageOnTouch != null)
-            damageOnTouch.enabled = false; 
+            damageOnTouch.enabled = false;
     }
 }
