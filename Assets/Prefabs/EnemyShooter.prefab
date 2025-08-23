@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.64, y: -8.83, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1adf33cfa859e4b8db6db4c829e1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 3
   stopDistance: 10
 --- !u!50 &9078923814805898277
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d33e15477a390468edaaf532af7129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 4244063153794169963, guid: e19937c592e4d3942a85b0621ef99387, type: 3}
   firePoint: {fileID: 3506653127573567915}
   fireCooldown: 3
