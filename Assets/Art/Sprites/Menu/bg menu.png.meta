@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 24d2361939a74384089fcbf9d6e07cbe
+guid: 840bd05580685c84aa2bd0ad05392ef3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5003292588572991786
-    second: fondo_intro-spritesheet_0
+      213: -652089831771405007
+    second: bg menu_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fondo_intro-spritesheet_0
+      name: bg menu_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 1536
+        height: 762
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,64 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6de13c636ebb09ab0800000000000000
-      internalID: -5003292588572991786
+      spriteID: 1350f9fb0cf43f6f0800000000000000
+      internalID: -652089831771405007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fondo_intro-spritesheet_1
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c4b42fa8b9cec54b9b5e3e6e1956ccd
-      internalID: 1827775801
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7aecf8d2fd9fe0c45b9fcf3d1590d61a
-      internalID: 1965270588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_3
+      name: bg menu_1
       rect:
         serializedVersion: 2
         x: 1536
         y: 0
-        width: 512
-        height: 512
+        width: 1536
+        height: 762
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,64 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccf917e5858ae3f49be8e5de86fec3bc
-      internalID: -1236094271
+      spriteID: 888e230ae3de1bb4fa9e424b371309ad
+      internalID: 2089177934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fondo_intro-spritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5051766d885a3be459521b7e915081ed
-      internalID: -1417683399
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d566e4f411d874d40a683aa5c2a90a0e
-      internalID: -1609981532
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_6
+      name: bg menu_2
       rect:
         serializedVersion: 2
         x: 3072
         y: 0
-        width: 512
-        height: 512
+        width: 1536
+        height: 762
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,64 +198,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90ca41dbf6a15c04c89e78991a06f6eb
-      internalID: 1189317991
+      spriteID: cb2023c8cce0ae746922fb0b2c454310
+      internalID: 595695388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fondo_intro-spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 3584
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 011da147149be6a4dad9cc256a12c7d6
-      internalID: -154387690
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 4096
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b113d414075a1e642a2b52636df11ebb
-      internalID: 975159451
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fondo_intro-spritesheet_9
+      name: bg menu_3
       rect:
         serializedVersion: 2
         x: 4608
         y: 0
-        width: 512
-        height: 512
+        width: 1536
+        height: 762
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,8 +220,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a7cd2af3fd43f949923b1d1c1fa7267
-      internalID: 797100111
+      spriteID: 97fdaa9959eb61c4b92ef198bdfa7dfd
+      internalID: 1400327092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg menu_4
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 1536
+        height: 762
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94b619053fb65f54c9c38f7fde8a5d14
+      internalID: -447094649
       vertices: []
       indices: 
       edges: []
@@ -362,7 +252,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d98a4d2da34f47e46b028e94195c1693
+    spriteID: 89c01d8516bc613449f3aad85bd1313e
     internalID: 0
     vertices: []
     indices: 
@@ -372,18 +262,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":1536.0,"y":762.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      fondo_intro-spritesheet_0: -5003292588572991786
-      fondo_intro-spritesheet_1: 1827775801
-      fondo_intro-spritesheet_2: 1965270588
-      fondo_intro-spritesheet_3: -1236094271
-      fondo_intro-spritesheet_4: -1417683399
-      fondo_intro-spritesheet_5: -1609981532
-      fondo_intro-spritesheet_6: 1189317991
-      fondo_intro-spritesheet_7: -154387690
-      fondo_intro-spritesheet_8: 975159451
-      fondo_intro-spritesheet_9: 797100111
+      bg menu_0: -652089831771405007
+      bg menu_1: 2089177934
+      bg menu_2: 595695388
+      bg menu_3: 1400327092
+      bg menu_4: -447094649
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
